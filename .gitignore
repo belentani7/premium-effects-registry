@@ -1,12 +1,33 @@
-# Node
+# dependencias
 node_modules/
-package-lock.json
-npm-debug.log*
+.venv/
+venv/
+__pycache__/
+*.py[cod]
 
-# OS
+# build
+dist/
+build/
+.next/
+out/
+target/
+*.egg-info/
+
+# entorno y secretos
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# sistema
 .DS_Store
 Thumbs.db
+*.log
 
-# IDE
-.vscode/
-.idea/
+# cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+coverage/
