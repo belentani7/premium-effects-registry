@@ -1,44 +1,17 @@
 # premium-effects-registry
 
-Proyecto premium-effects-registry del ecosistema Belentani.
+Registro de efectos visuales premium del universo Belentani.
 
-## Estado
+## Qué es
 
-| Campo | Valor |
-|---|---|
-| Stack | `unknown` |
-| Creado | 2026-09-07 |
-| Autor | Pedro Belentani |
-| Licencia | MIT |
+Un catálogo de los efectos que dan carácter a las webs del universo: cristal, neón, scanlines,
+distorsión. En vez de reimplementarlos en cada proyecto, se registran aquí y se reutilizan.
 
-## Instalacion
+## Cómo se usa
 
-```bash
-# ver documentacion
-```
-
-## Uso
-
-```bash
-# ver scripts
-```
-
-## Tests
-
-```bash
-# pendiente
-```
-
-## Estructura
-
-```
-.
-```
-
-## Variables de entorno
-
-Copia `.env.example` a `.env` y rellena los valores. Nunca comitees `.env`.
+Se consulta el registro, se elige el efecto y se copia al proyecto. La regla es simple: **un
+efecto vive en un sitio; los demás lo referencian.**
 
 ## Licencia
 
-MIT - ver [LICENSE](LICENSE).
+Sin licencia declarada.
