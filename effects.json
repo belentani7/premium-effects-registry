@@ -1,0 +1,37 @@
+[
+  {
+    "id": "glass-surface",
+    "name": "Glass surface",
+    "kind": "css",
+    "description": "Translucent glass surface with blur and subtle borders; implement locally with CSS backdrop-filter.",
+    "source": "https://github.com/tailwindlabs/tailwindcss"
+  },
+  {
+    "id": "scroll-motion",
+    "name": "Scroll motion",
+    "kind": "animation",
+    "description": "Smooth scroll animation reference; check reduced motion preferences before applying.",
+    "source": "https://github.com/darkroomengineering/lenis"
+  },
+  {
+    "id": "webgl-scene",
+    "name": "WebGL scene",
+    "kind": "webgl",
+    "description": "Three-dimensional scene rendering reference; provide static fallback for unsupported devices.",
+    "source": "https://github.com/mrdoob/three.js"
+  },
+  {
+    "id": "svg-illustration",
+    "name": "SVG illustration",
+    "kind": "svg",
+    "description": "SVG vector rendering and interactive composition reference; sanitize untrusted markup.",
+    "source": "https://github.com/svgdotjs/svg.js"
+  },
+  {
+    "id": "canvas-particles",
+    "name": "Canvas particles",
+    "kind": "canvas",
+    "description": "Canvas-based generative particles with device pixel ratio awareness and performance limits.",
+    "source": "https://github.com/processing/p5.js"
+  }
+]
