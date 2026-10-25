@@ -2,7 +2,7 @@
 "use strict";
 const { loadRegistry, searchEffects } = require("../src/registry.cjs");
 
-const HELP = \`Uso: node bin/effects.cjs [palabras] [--kind css|webgl|svg|canvas|animation] [--limit 1..500] [--json]\n       node bin/effects.cjs --help\nConsulta offline, sin claves ni conexiones de red.\n\`;
+const HELP = `Uso: node bin/effects.cjs [palabras] [--kind css|webgl|svg|canvas|animation] [--limit 1..500] [--json]\n       node bin/effects.cjs --help\nConsulta offline, sin claves ni conexiones de red.\n`;
 
 function parseArgs(args) {
   const options = { words: [], kind: undefined, limit: undefined, json: false, help: false };
@@ -19,10 +19,10 @@ function parseArgs(args) {
       continue;
     }
     if (!positional && (arg === "--kind" || arg === "--limit")) {
-      if (seen.has(arg)) throw new Error(\`Duplicate option: \${arg}\`);
+      if (seen.has(arg)) throw new Error(`Duplicate option: ${arg}`);
       seen.add(arg);
       const value = args[++i];
-      if (!value || value.startsWith("--")) throw new Error(\`Missing \${arg} value\`);
+      if (!value || value.startsWith("--")) throw new Error(`Missing ${arg} value`);
       if (arg === "--kind") options.kind = value;
       else {
         if (!/^[1-9][0-9]*$/.test(value) || Number(value) > 500) throw new Error("--limit must be an integer from 1 to 500");
@@ -30,7 +30,7 @@ function parseArgs(args) {
       }
       continue;
     }
-    if (!positional && arg.startsWith("-")) throw new Error(\`Unknown option: \${arg}\`);
+    if (!positional && arg.startsWith("-")) throw new Error(`Unknown option: ${arg}`);
     options.words.push(arg);
   }
   return options;
@@ -42,7 +42,7 @@ function main(args) {
   const results = searchEffects(loadRegistry(), options.words.join(" "), options.kind);
   const selected = options.limit === undefined ? results : results.slice(0, options.limit);
   if (options.json) console.log(JSON.stringify(selected, null, 2));
-  else for (const e of selected) console.log(\`\${e.id}\t\${e.name}\t\${e.source}\`);
+  else for (const e of selected) console.log(`${e.id}\t${e.name}\t${e.source}`);
   return selected.length;
 }
 if (require.main === module) {
