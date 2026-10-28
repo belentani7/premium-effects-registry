@@ -22,3 +22,13 @@ test("CLI supports literal query after --", () => { assert.deepEqual(parseArgs([
 test("CLI returns filtered JSON from unrelated cwd", () => { const result = run("--kind", "webgl", "scene", "--json"); assert.equal(result.status, 0, result.stderr); assert.deepEqual(JSON.parse(result.stdout).map(e => e.id), ["webgl-scene"]); });
 test("CLI applies --limit and returns help without catalog access", () => { const result = run("--limit", "2", "--json"); assert.equal(result.status, 0, result.stderr); assert.equal(JSON.parse(result.stdout).length, 2); const help = run("--help"); assert.equal(help.status, 0); assert.match(help.stdout, /--limit/); });
 test("CLI fails closed on invalid kind", () => { const result = run("--kind", "other", "--json"); assert.equal(result.status, 1); assert.match(result.stderr, /kind/); });
+
+test("catalog rejects terminal control characters and bidirectional spoofing", () => {
+  const base = loadRegistry()[0];
+  for (const name of ["Fake\nforged-row", "Bad\tcolumn", "Escape\u001b[31m", "RTL\u202eexe.txt"]) {
+    assert.throws(() => validateRegistry([{ ...base, name }]), /Invalid name/);
+  }
+  for (const description of ["Line\rbreak", "Color\u001b[0m", "Spoof\u2066entry"]) {
+    assert.throws(() => validateRegistry([{ ...base, description }]), /Invalid description/);
+  }
+});

@@ -5,6 +5,8 @@ const path = require("node:path");
 const DEFAULT_PATH = path.join(__dirname, "..", "effects.json");
 const ID_PATTERN = /^[a-z][a-z0-9-]{1,63}$/;
 const ALLOWED_KINDS = new Set(["css", "webgl", "svg", "canvas", "animation"]);
+// Reject terminal escapes, control characters and bidi overrides in displayed text.
+const UNSAFE_DISPLAY_TEXT = /[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/u;
 const GITHUB_SOURCE = /^https:\/\/github\.com\/([A-Za-z0-9](?:[A-Za-z0-9-]{0,38}))\/([A-Za-z0-9_.-]{1,100})\/?$/;
 
 function validateRegistry(input) {
@@ -14,8 +16,8 @@ function validateRegistry(input) {
     if (!effect || typeof effect !== "object" || Array.isArray(effect)) throw new Error(`Invalid effect at ${index}`);
     const { id, name, kind, description, source } = effect;
     if (typeof id !== "string" || !ID_PATTERN.test(id) || seen.has(id)) throw new Error(`Invalid or duplicate effect ID: ${id}`);
-    if (typeof name !== "string" || !name.trim() || name.length > 120) throw new Error(`Invalid name: ${id}`);
-    if (typeof description !== "string" || !description.trim() || description.length > 500) throw new Error(`Invalid description: ${id}`);
+    if (typeof name !== "string" || !name.trim() || name.length > 120 || UNSAFE_DISPLAY_TEXT.test(name)) throw new Error(`Invalid name: ${id}`);
+    if (typeof description !== "string" || !description.trim() || description.length > 500 || UNSAFE_DISPLAY_TEXT.test(description)) throw new Error(`Invalid description: ${id}`);
     if (!ALLOWED_KINDS.has(kind)) throw new Error(`Invalid kind: ${id}`);
     const match = typeof source === "string" ? GITHUB_SOURCE.exec(source) : null;
     if (!match || match[2] === "." || match[2] === "..") throw new Error(`Invalid source: ${id}`);
