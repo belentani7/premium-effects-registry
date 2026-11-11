@@ -15,3 +15,7 @@ efecto vive en un sitio; los demás lo referencian.**
 ## Licencia
 
 Sin licencia declarada.
+
+
+## Producto
+Véase `plataforma/OFERTA.md`, `plataforma/precios.json`, `plataforma/ONEPAGER.md`.
